@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#f5c400">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Teo Páez Radio">
+<title>Teo Páez Radio Online — En Vivo</title>
+<meta name="description" content="Teo Páez Radio Online. Escucha nuestra señal en vivo, música y entretenimiento.">
+<link rel="canonical" href="./">
+
+<!-- METADATOS PARA FACEBOOK / WHATSAPP / X -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Teo Páez Radio Online">
+<meta property="og:title" content="Teo Páez Radio Online — En Vivo">
+<meta property="og:description" content="Escucha Teo Páez Radio Online en vivo. Música y entretenimiento.">
+<meta property="og:image" content="https://i.ibb.co/DfD6THmT/Remover-fundo-5.png">
+<meta property="og:image:alt" content="Teo Páez Radio Online">
+<meta property="og:image:type" content="image/png">
+<meta property="og:url" content="">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Teo Páez Radio Online — En Vivo">
+<meta name="twitter:description" content="Escucha Teo Páez Radio Online en vivo. Música y entretenimiento.">
+<meta name="twitter:image" content="https://i.ibb.co/DfD6THmT/Remover-fundo-5.png">
+
+<link rel="icon" href="icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root{--yellow:#f5c400;--yellow2:#ffd928;--blue:#063b91;--blue2:#075bc7;--dark:#061d49;--white:#fff;--black:#07101f;--safe:env(safe-area-inset-bottom,0px);--top:68px;--mini:82px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;height:100dvh;margin:0;overflow:hidden;font-family:Montserrat,Arial,sans-serif;background:#06132e;color:#fff}
+button{font-family:inherit;border:0;cursor:pointer}a{text-decoration:none;color:inherit}img{user-select:none;-webkit-user-drag:none}
+
+/* INTRO: EL MISMO VIDEO ENTREGADO */
+#splash{position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .45s,visibility .45s}
+#splash.hide{opacity:0;visibility:hidden;pointer-events:none}
+#introVideo{width:100%;height:100%;object-fit:cover;display:block}
+#introShade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.58));pointer-events:none}
+#startIntro{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);display:none;flex-direction:column;align-items:center;gap:10px;color:#fff;text-align:center}
+#startIntro.show{display:flex}
+#startIntro button{width:72px;height:72px;border-radius:50%;background:var(--yellow);color:var(--blue);font-size:27px;box-shadow:0 0 0 10px rgba(245,196,0,.18),0 15px 45px #0008}
+#startIntro span{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+
+/* VISTA 1 */
+#home{position:fixed;inset:0;display:flex;flex-direction:column;overflow:hidden;padding-bottom:calc(var(--mini) + var(--safe));background:#071020}
+.bg-video{position:absolute;inset:-7%;width:114%;height:114%;object-fit:cover;z-index:0;filter:blur(14px) saturate(1.2) brightness(.62);opacity:.75;transform:scale(1.04)}
+.bg-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(circle at 50% 35%,rgba(245,196,0,.25),transparent 48%),linear-gradient(180deg,rgba(4,18,43,.15),rgba(3,12,29,.5) 52%,rgba(2,9,24,.96) 100%)}
+.topbar{position:relative;z-index:5;height:var(--top);display:flex;align-items:center;justify-content:space-between;padding:8px clamp(12px,3vw,32px)}
+.station-title{font-size:clamp(16px,3.5vw,31px);font-weight:900;letter-spacing:-.7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.header-logo{width:46px;height:46px;border-radius:14px;background:#fff;padding:3px;object-fit:contain;flex-shrink:0}
+.share-head{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);color:var(--blue);font-size:20px;box-shadow:0 7px 20px rgba(0,0,0,.25)}
+
+.content{position:relative;z-index:4;flex:1;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) auto auto;gap:10px;padding:4px clamp(10px,2.5vw,28px) 24px;max-width:1250px;width:100%;margin:auto}
+.hero{min-height:0;position:relative;overflow:visible;display:flex;align-items:center;justify-content:center;padding:4px;background:transparent;border:0;box-shadow:none}
+}
+.hero-logo{position:relative;z-index:2;width:min(56%,430px);max-height:76%;object-fit:contain;filter:drop-shadow(0 15px 24px rgba(0,0,0,.48));animation:logoPulse 2.8s ease-in-out infinite}@keyframes logoPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+.social-row{display:flex;align-items:center;justify-content:center;gap:12px;height:48px}.social-row a,.social-row button{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(5,18,43,.72);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:17px;transition:.18s;box-shadow:0 5px 15px rgba(0,0,0,.25)}.social-row a:hover,.social-row button:hover{background:var(--yellow);color:var(--blue);transform:translateY(-2px) scale(1.05)}
+.ads{min-height:0}.ads-title{display:flex;align-items:center;gap:7px;height:25px;font-size:clamp(11px,1.8vw,17px);font-weight:900;text-transform:uppercase}.ads-title i{color:var(--yellow)}
+.slider-wrap{height:clamp(86px,14vh,145px);margin-top:4px;border-radius:16px;overflow:hidden;position:relative;background:#0c1a33;border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 25px rgba(0,0,0,.3)}
+.slider{height:100%;display:flex;transition:transform .45s cubic-bezier(.22,.8,.28,1)}.slide{min-width:100%;height:100%}.slide img{width:100%;height:100%;display:block;object-fit:cover}
+.slider-btn{position:absolute;top:50%;transform:translateY(-50%);width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--blue);box-shadow:0 4px 12px #0005}.prev{left:8px}.next{right:8px}.dots{position:absolute;left:50%;bottom:5px;transform:translateX(-50%);display:flex;gap:5px;padding:4px 7px;border-radius:20px;background:#041b46a8}.dot-slide{width:6px;height:6px;border-radius:8px;background:#fff8}.dot-slide.active{width:17px;background:var(--yellow)}
+
+/* INSTALAR PWA — dentro del mini reproductor */
+.install-app{display:none;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 11px;border-radius:999px;background:var(--yellow);color:var(--blue);font-size:11px;font-weight:900;white-space:nowrap;box-shadow:0 5px 14px rgba(0,0,0,.25);flex-shrink:0}
+.install-app.ready{display:flex}
+.install-app:active{transform:scale(.96)}
+@media(max-width:700px){.install-app{width:38px;padding:0;font-size:15px}.install-app span{display:none}}
+
+/* MINI PLAYER FIJO */
+#mini{position:fixed;z-index:100;left:0;right:0;bottom:0;min-height:var(--mini);padding:7px 10px calc(7px + var(--safe));background:rgba(4,18,43,.96);border-top:3px solid var(--yellow);box-shadow:0 -10px 30px rgba(0,0,0,.4);cursor:pointer}
+.mini-inner{width:min(1100px,100%);height:100%;min-height:58px;margin:auto;display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:17px;background:linear-gradient(100deg,var(--blue),#0759bc);color:#fff}.mini-logo{width:46px;height:46px;border-radius:12px;background:#fff;padding:3px;object-fit:contain;flex-shrink:0}.mini-meta{min-width:0;flex:1}.mini-name{font-size:clamp(11px,1.8vw,17px);font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mini-status{font-size:10px;margin-top:3px;opacity:.9}.eq{display:flex;align-items:end;gap:3px;height:23px}.eq span{width:3px;height:7px;border-radius:3px;background:var(--yellow);animation:eq .65s ease-in-out infinite alternate}.eq.paused span{animation-play-state:paused;opacity:.55}@keyframes eq{to{transform:scaleY(.3)}}
+.mini-play{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);color:var(--blue);font-size:19px;flex-shrink:0}.mini-vol{width:36px;height:36px;border-radius:50%;background:transparent;color:#fff;display:none}@media(min-width:600px){.mini-vol{display:grid;place-items:center}}
+
+/* VISTA 2 — MISMO PLAYER DEL HTML SOLICITADO, ADAPTADO A TEO PÁEZ */
+#player{position:fixed;inset:0;z-index:200;background:linear-gradient(145deg,#fff,#f3f7ff);color:var(--dark);display:flex;flex-direction:column;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;padding-top:env(safe-area-inset-top,0px)}#player.open{transform:translateY(0)}
+.player-top{height:64px;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #dce7fb;background:#fff}.back{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#edf3ff;color:var(--blue);font-size:18px}.player-top-title{font-weight:900;font-size:clamp(14px,3vw,22px)}.player-logo-top{width:43px;height:43px;border-radius:11px;object-fit:contain}
+.player-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:17px;padding:20px 18px 35px}.disc-wrap{position:relative;width:min(62vw,300px);aspect-ratio:1}.disc{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle,#f5c400 0 42%,#075bc7 43% 47%,#fff 48% 50%,#063b91 51% 100%);border:7px solid #063b91;display:flex;align-items:center;justify-content:center;box-shadow:0 22px 50px #063b9140}.disc.spinning{animation:spin 8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.disc-core{width:43%;height:43%;border-radius:50%;background:#fff;border:4px solid var(--yellow);overflow:hidden;display:flex;align-items:center;justify-content:center}.disc-core img{width:100%;height:100%;object-fit:contain}
+.player-info h1{font-size:clamp(21px,5vw,31px);font-weight:900;color:var(--blue);margin:0}.player-info p{margin:6px 0 0;color:#5b6b83;font-size:13px}.on-air{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:999px;background:var(--yellow);color:var(--blue);font-weight:900;font-size:12px}.controls{display:flex;align-items:center;justify-content:center;gap:25px}.round{background:none;color:var(--blue);font-size:22px;width:42px;height:42px;border-radius:50%}.main-play{width:78px;height:78px;border-radius:50%;background:var(--blue);color:#fff;font-size:27px;box-shadow:0 12px 30px #063b9140}.volume-row{display:flex;align-items:center;gap:10px;width:min(100%,240px)}.volume-row input{width:100%;accent-color:var(--blue)}#status{font-size:12px;color:#65748a;min-height:15px}.player-share{display:flex;gap:9px}.player-share button{width:38px;height:38px;border-radius:50%;background:#edf3ff;color:var(--blue)}
+
+@media(max-width:700px){.content{padding:2px 8px 22px;gap:6px;grid-template-rows:minmax(0,1fr) auto auto}.hero{padding:0;margin-top:-4px}.hero-logo{width:min(72%,330px);max-height:70%}.social-row{height:42px;gap:9px}.social-row a,.social-row button{width:38px;height:38px;font-size:15px}.slider-wrap{height:clamp(118px,18vh,155px);margin-top:1px}.ads-title{display:none}.mini-inner{gap:7px;padding:5px 7px}.mini-logo{width:42px;height:42px}.eq{display:none}.mini-play{width:46px;height:46px}}
+@media(max-height:680px){:root{--top:57px;--mini:72px}.content{padding-bottom:16px}.hero-logo{width:min(62%,270px);max-height:65%}.social-row{height:38px}.social-row a,.social-row button{width:34px;height:34px;font-size:13px}.slider-wrap{height:105px}.ads-title{display:none}.player-body{gap:12px;padding-top:12px}.disc-wrap{width:min(48vh,230px)}.main-play{width:65px;height:65px}}
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div id="splash">
+  <video id="introVideo" playsinline webkit-playsinline preload="auto" poster="media/poster.jpg">
+    <source src="media/intro.mp4" type="video/mp4">
+  </video>
+  <div id="introShade"></div>
+  <div id="startIntro"><button id="startIntroBtn" aria-label="Iniciar intro"><i class="fa-solid fa-play"></i></button><span>Toca para comenzar</span></div>
+</div>
+
+<!-- VISTA 1 -->
+<main id="home">
+  <video class="bg-video" autoplay muted loop playsinline aria-hidden="true" poster="media/poster.jpg"><source src="media/intro.mp4" type="video/mp4"></video>
+  <div class="bg-overlay"></div>
+
+  <header class="topbar">
+    <div class="station-title">TEO PÁEZ RADIO ONLINE</div>
+  </header>
+
+  <section class="content">
+    <section class="hero">
+      <img class="hero-logo" src="https://i.ibb.co/DfD6THmT/Remover-fundo-5.png" alt="Teo Páez Radio Online">
+    </section>
+
+    <div class="social-row" aria-label="Redes sociales y compartir">
+      <a href="https://www.facebook.com/share/1JCv5CQTy4/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://wa.me/595976936516" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://www.tiktok.com/@teodoropaez0?_r=1&_t=ZN-99cAUH03hKs" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      <button id="shareApp" aria-label="Compartir aplicativo"><i class="fa-solid fa-share-nodes"></i></button>
+    </div>
+
+    <section class="ads">
+      <div class="ads-title"><i class="fa-solid fa-images"></i> ANUNCIOS</div>
+      <div class="slider-wrap" id="sliderWrap">
+        <div class="slider" id="slider">
+          <div class="slide"><img src="media/ad-01.png" alt="Publicidad 1"></div>
+          <div class="slide"><img src="media/ad-02.png" alt="Publicidad 2"></div>
+          <div class="slide"><img src="media/ad-03.png" alt="Publicidad 3"></div>
+          <div class="slide"><img src="media/ad-04.png" alt="Publicidad 4"></div>
+          <div class="slide"><img src="media/ad-05.png" alt="Publicidad 5"></div>
+        </div>
+        <button class="slider-btn prev" id="prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="slider-btn next" id="next" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="dots" id="dots"></div>
+      </div>
+    </section>
+  </section>
+</main>
+
+<!-- MINI PLAYER -->
+<div id="mini">
+  <div class="mini-inner">
+    <img class="mini-logo" src="https://i.ibb.co/DfD6THmT/Remover-fundo-5.png" alt="Teo Páez Radio Online">
+    <div class="mini-meta"><div class="mini-name">Teo Páez Radio Online</div><div class="mini-status" id="miniStatus">Listo para escuchar</div></div>
+    <button class="install-app ready" id="installApp" aria-label="Instalar aplicación"><i class="fa-solid fa-download"></i><span>Instalar</span></button>
+    <div class="eq paused" id="miniEq"><span></span><span></span><span></span><span></span></div>
+    <button class="mini-vol" id="miniVol" aria-label="Silenciar"><i class="fa-solid fa-volume-high"></i></button>
+    <button class="mini-play" id="miniPlay" aria-label="Reproducir"><i class="fa-solid fa-play"></i></button>
+  </div>
+</div>
+
+<!-- VISTA 2 PLAYER -->
+<section id="player" aria-hidden="true">
+  <div class="player-top">
+    <button class="back" id="back" aria-label="Volver"><i class="fa-solid fa-arrow-left"></i></button>
+    <div class="player-top-title">TEO PÁEZ RADIO ONLINE</div>
+    <img class="player-logo-top" src="https://i.ibb.co/DfD6THmT/Remover-fundo-5.png" alt="Teo Páez">
+  </div>
+  <div class="player-body">
+    <div class="disc-wrap"><div class="disc" id="disc"><div class="disc-core"><img src="https://i.ibb.co/DfD6THmT/Remover-fundo-5.png" alt="Teo Páez Radio Online"></div></div></div>
+    <div class="on-air"><span class="live-dot" style="background:#063b91"></span> AL AIRE · EN VIVO</div>
+    <div class="player-info"><h1>TEO PÁEZ RADIO ONLINE</h1><p>Música y entretenimiento en vivo</p></div>
+    <div id="trackTitle">Teo Páez Radio Online — En Vivo</div>
+    <div class="controls">
+      <button class="round" id="muteBtn" aria-label="Silenciar"><i class="fa-solid fa-volume-high"></i></button>
+      <button class="main-play" id="playBtn" aria-label="Reproducir"><i class="fa-solid fa-play"></i></button>
+      <button class="round" id="reloadBtn" aria-label="Reconectar"><i class="fa-solid fa-rotate-right"></i></button>
+    </div>
+    <div class="volume-row"><i class="fa-solid fa-volume-low"></i><input id="volume" type="range" min="0" max="100" value="85"><i class="fa-solid fa-volume-high"></i></div>
+    <div id="status">Listo para escuchar</div>
+  </div>
+</section>
+
+<audio id="audio" preload="none" playsinline></audio>
+
+<script>
+(() => {
+  const ogUrl=document.querySelector('meta[property="og:url"]'); if(ogUrl) ogUrl.content=location.href;
+
+  const CONFIG={
+    STREAM_URL:'https://fpsnew1.listen2myradio.com:2199/listen.php?ip=82.145.63.6&port=5381&type=ice&mount=stream',
+    STATION_NAME:'Teo Páez Radio Online',
+    LOGO:'https://i.ibb.co/DfD6THmT/Remover-fundo-5.png',
+    SOCIAL:{
+      facebook:'https://www.facebook.com/share/1JCv5CQTy4/',
+      whatsapp:'https://wa.me/595976936516',
+      tiktok:'https://www.tiktok.com/@teodoropaez0?_r=1&_t=ZN-99cAUH03hKs'
+    }
+  };
+
+  const audio=document.getElementById('audio'), mini=document.getElementById('mini'), miniPlay=document.getElementById('miniPlay'), miniStatus=document.getElementById('miniStatus'), miniEq=document.getElementById('miniEq'), miniVol=document.getElementById('miniVol');
+  const player=document.getElementById('player'), back=document.getElementById('back'), playBtn=document.getElementById('playBtn'), muteBtn=document.getElementById('muteBtn'), reloadBtn=document.getElementById('reloadBtn'), volume=document.getElementById('volume'), status=document.getElementById('status'), trackTitle=document.getElementById('trackTitle'), disc=document.getElementById('disc');
+  let lastVolume=85, retryTimer=null;
+  audio.volume=.85;
+
+  function openPlayer(){player.classList.add('open');player.setAttribute('aria-hidden','false')}
+  function closePlayer(){player.classList.remove('open');player.setAttribute('aria-hidden','true')}
+  mini.addEventListener('click',e=>{if(e.target.closest('#miniPlay')){togglePlay();return}if(e.target.closest('#miniVol')){toggleMute();return}openPlayer()});
+  back.addEventListener('click',closePlayer);
+
+  function setUI(on){
+    playBtn.innerHTML=on?'<i class="fa-solid fa-pause"></i>':'<i class="fa-solid fa-play"></i>';
+    miniPlay.innerHTML=on?'<i class="fa-solid fa-pause"></i>':'<i class="fa-solid fa-play"></i>';
+    disc.classList.toggle('spinning',on);miniEq.classList.toggle('paused',!on);
+    miniStatus.textContent=on?'Sonando en vivo':'Listo para escuchar';
+    status.textContent=on?'Transmitiendo en vivo':'Listo para escuchar';
+  }
+  function freshUrl(){return CONFIG.STREAM_URL+(CONFIG.STREAM_URL.includes('?')?'&':'?')+'_='+Date.now()}
+  function load(){audio.src=freshUrl();audio.load()}
+  async function start(){
+    if(!CONFIG.STREAM_URL)return;
+    status.textContent='Conectando…';miniStatus.textContent='Conectando…';load();
+    try{await audio.play();setUI(true);trackTitle.textContent=CONFIG.STATION_NAME+' — En Vivo'}
+    catch(e){status.textContent='No se pudo conectar';miniStatus.textContent='No se pudo conectar';setUI(false)}
+  }
+  function togglePlay(){if(audio.paused)start();else{audio.pause();setUI(false)}}
+  function toggleMute(){if(audio.muted||audio.volume===0){audio.muted=false;audio.volume=lastVolume/100;volume.value=lastVolume;muteBtn.innerHTML='<i class="fa-solid fa-volume-high"></i>';miniVol.innerHTML='<i class="fa-solid fa-volume-high"></i>'}else{lastVolume=Number(volume.value)||85;audio.muted=true;audio.volume=0;volume.value=0;muteBtn.innerHTML='<i class="fa-solid fa-volume-xmark"></i>';miniVol.innerHTML='<i class="fa-solid fa-volume-xmark"></i>'}}
+  playBtn.addEventListener('click',togglePlay);
+  reloadBtn.addEventListener('click',()=>{const was=!audio.paused;audio.pause();setUI(false);if(was)start()});
+  muteBtn.addEventListener('click',toggleMute);miniVol.addEventListener('click',toggleMute);
+  volume.addEventListener('input',()=>{audio.muted=false;audio.volume=Number(volume.value)/100;lastVolume=Number(volume.value);muteBtn.innerHTML='<i class="fa-solid fa-volume-high"></i>';miniVol.innerHTML='<i class="fa-solid fa-volume-high"></i>'});
+  audio.addEventListener('playing',()=>setUI(true));audio.addEventListener('pause',()=>setUI(false));audio.addEventListener('waiting',()=>{if(!audio.paused){status.textContent='Conectando…';miniStatus.textContent='Conectando…'}});audio.addEventListener('error',()=>{setUI(false);status.textContent='Señal temporalmente no disponible';miniStatus.textContent='Señal temporalmente no disponible';clearTimeout(retryTimer);retryTimer=setTimeout(()=>{if(!audio.paused)start()},4000)});
+
+  // COMPARTIR: Web Share API + copia como respaldo
+  async function shareApp(){
+    const data={title:'Teo Páez Radio Online',text:'Escucha Teo Páez Radio Online en vivo.',url:location.href};
+    try{if(navigator.share){await navigator.share(data)}else if(navigator.clipboard){await navigator.clipboard.writeText(location.href);alert('Enlace de la radio copiado.')}}catch(e){}
+  }
+  document.getElementById('shareApp').addEventListener('click',e=>{e.stopPropagation();shareApp()});
+
+  // CARRUSEL
+  const slider=document.getElementById('slider'),wrap=document.getElementById('sliderWrap'),slides=[...slider.children],dots=document.getElementById('dots');let index=0,timer,startX=0;
+  slides.forEach((_,i)=>{const d=document.createElement('button');d.className='dot-slide'+(i===0?' active':'');d.type='button';d.setAttribute('aria-label','Publicidad '+(i+1));d.onclick=()=>go(i);dots.appendChild(d)});
+  function go(i){index=(i+slides.length)%slides.length;slider.style.transform='translateX(-'+index*100+'%)';[...dots.children].forEach((d,n)=>d.classList.toggle('active',n===index));restart()}
+  function restart(){clearInterval(timer);timer=setInterval(()=>go(index+1),5000)}
+  document.getElementById('next').onclick=e=>{e.stopPropagation();go(index+1)};document.getElementById('prev').onclick=e=>{e.stopPropagation();go(index-1)};
+  wrap.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;clearInterval(timer)},{passive:true});wrap.addEventListener('touchend',e=>{const diff=e.changedTouches[0].clientX-startX;if(Math.abs(diff)>40)diff<0?go(index+1):go(index-1);else restart()},{passive:true});restart();
+
+  // Evita scroll accidental en la vista principal, pero permite el player completo.
+  document.addEventListener('touchmove',e=>{if(!e.target.closest('#player')&&!e.target.closest('input'))e.preventDefault()},{passive:false});
+
+  // INTRO: el video nuevo es el intro; después el mismo video queda de fondo, muteado.
+  const splash=document.getElementById('splash'), intro=document.getElementById('introVideo'), introStart=document.getElementById('startIntro'), startBtn=document.getElementById('startIntroBtn');let finished=false;
+  function hideIntro(){if(finished)return;finished=true;intro.pause();splash.classList.add('hide');document.querySelector('.bg-video').play().catch(()=>{})}
+  async function playIntro(){intro.currentTime=0;intro.muted=false;try{await intro.play();introStart.classList.remove('show')}catch(e){introStart.classList.add('show')}}
+  intro.addEventListener('ended',hideIntro);intro.addEventListener('error',hideIntro);startBtn.addEventListener('click',()=>{introStart.classList.remove('show');playIntro()});
+  // Siempre mostramos el intro; si el navegador bloquea audio, aparece el botón.
+  playIntro();setTimeout(()=>{if(!finished)hideIntro()},10000);
+
+  /* PWA — botón Instalar dentro del mini reproductor */
+  const installApp=document.getElementById('installApp');
+  let deferredPrompt=null;
+  const standalone=()=>window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true;
+  if(standalone()) installApp.style.display='none';
+  window.addEventListener('beforeinstallprompt',e=>{
+    e.preventDefault();
+    deferredPrompt=e;
+    installApp.style.display='flex';
+  });
+  installApp.addEventListener('click',async e=>{
+    e.stopPropagation();
+    if(deferredPrompt){
+      deferredPrompt.prompt();
+      try{await deferredPrompt.userChoice}catch(_){}
+      deferredPrompt=null;
+      return;
+    }
+    if(standalone()) return;
+    alert('Para instalar Teo Páez Radio: abre el menú de tu navegador y selecciona «Instalar aplicación» o «Añadir a pantalla de inicio».');
+  });
+  window.addEventListener('appinstalled',()=>{deferredPrompt=null;installApp.style.display='none'});
+
+  /* Registrar el Service Worker para que la PWA sea instalable */
+  if('serviceWorker' in navigator){
+    window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+  }
+
+  // Teclas útiles en escritorio
+  document.addEventListener('keydown',e=>{if(e.code==='Space'&&document.activeElement.tagName!=='INPUT'){e.preventDefault();togglePlay()}if(e.code==='Escape')closePlayer()});
+})();
+</script>
+</body>
+</html>
